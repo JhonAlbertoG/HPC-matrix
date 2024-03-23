@@ -8,10 +8,10 @@ double **matrix1, **matrix2, **matrix3;
 
 double ** allocate_matrix( int size )
 {
-  /* Allocate 'size' * 'size' doubles contiguously. */
+  
   double * vals = (double *) malloc( size * size * sizeof(double) );
 
-  /* Allocate array of double* with size 'size' */
+  
   double ** ptrs = (double **) malloc( size * sizeof(double*) );
 
   int i;
@@ -46,12 +46,6 @@ void print_matrix( double **matrix, int size )
   }
 }
 
-/**
- * Thread routine.
- * Each thread works on a portion of the 'matrix1'.
- * The start and end of the portion depend on the 'arg' which
- * is the ID assigned to threads sequentially. 
- */
 void * worker( void *arg )
 {
   int i, j, k, tid, portion_size, row_start, row_end;
@@ -64,9 +58,7 @@ void * worker( void *arg )
 
   for (i = row_start; i < row_end; ++i) { // hold row index of 'matrix1'
     for (j = 0; j < size; ++j) { // hold column index of 'matrix2'
-      sum = 0; // hold value of a cell
-      /* one pass to sum the multiplications of corresponding cells
-	 in the row vector and column vector. */
+      sum = 0; 
       for (k = 0; k < size; ++k) { 
 	sum += matrix1[ i ][ k ] * matrix2[ k ][ j ];
       }
